@@ -10,6 +10,6 @@ class User {
     required this.message,
     required this.profilePic,
     required this.unreadMSG,
-    required this.isPending,
+    this.isPending = false,
   });
 }

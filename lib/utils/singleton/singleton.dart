@@ -28,7 +28,6 @@ class Singleton {
       profilePic:
           "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=880&q=80",
       unreadMSG: 0,
-      isPending: false,
     ),
     User(
       username: "Jan Dan",
@@ -36,7 +35,6 @@ class Singleton {
       profilePic:
           "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
       unreadMSG: 3,
-      isPending: false,
     ),
     User(
       username: "Rebecca Young",
@@ -47,12 +45,33 @@ class Singleton {
       isPending: true,
     ),
     User(
-      username: "Jan Dan",
-      message: "Happy Coders",
+      username: "Lena Kar",
+      message: "Nice to meet you",
       profilePic:
-          "https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+          "https://images.unsplash.com/photo-1534528741775-53994a69daeb?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=764&q=80",
       unreadMSG: 3,
-      isPending: false,
+    ),
+    User(
+      username: "Kali Linux",
+      message: "Hackers ,,,",
+      profilePic:
+          "https://images.unsplash.com/photo-1519345182560-3f2917c472ef?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      unreadMSG: 3,
+    ),
+    User(
+      username: "Kara mara",
+      message: "Silent World",
+      profilePic:
+          "https://images.unsplash.com/photo-1455274111113-575d080ce8cd?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=688&q=80",
+      unreadMSG: 4,
+    ),
+    User(
+      username: "Martin",
+      message: "Hello World",
+      profilePic:
+          "https://images.unsplash.com/photo-1560250097-0b93528c311a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      unreadMSG: 0,
+      isPending: true,
     ),
   ];
 }
