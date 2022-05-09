@@ -1,4 +1,5 @@
 import 'package:chattr/views/screens/chat/chat_screen.dart';
+import 'package:chattr/views/screens/chat_messages/chat_messages.dart';
 import 'package:chattr/views/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 
@@ -10,4 +11,5 @@ Map<String, WidgetBuilder> routes = {
   PasswordSection.routeScreen: (context) => PasswordSection(),
   SetupProfileSection.routeScreen: (context) => SetupProfileSection(),
   ChatScreen.routeScreen: (context) => ChatScreen(),
+  // ChatMessagesScreen.routeScreen: (context) => ChatMessagesScreen(userIndex: ,),
 };

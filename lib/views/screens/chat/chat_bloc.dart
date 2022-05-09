@@ -1,12 +1,17 @@
 import 'package:chattr/models/user.dart';
+import 'package:chattr/utils/singleton/singleton.dart';
 
 class ChatBloc {
-  List<User> usersList = [
-    User(
-      username: "username",
-      message: "message",
-      unreadMSG: "unreadMSG",
-      isPending: "isPending",
-    ),
-  ];
+  List<User> usersList = Singleton.instance.usersList;
+  List<User> pendingUsersList = [];
+
+  // filterUsersList() {
+  //   for (var i = 0; i < usersList.length; i++) {
+  //     if (usersList[i].isPending == true) {
+  //       return pendingUsersList;
+  //     } else {
+  //       return usersList;
+  //     }
+  //   }
+  // }
 }

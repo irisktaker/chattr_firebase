@@ -34,6 +34,6 @@ TextStyle textStyle = const TextStyle(
 );
 
 TextStyle subTextStyle = const TextStyle(
-  color: Colors.black,
+  color: kSecondaryColor,
   fontSize: 12,
 );
