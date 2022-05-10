@@ -9,8 +9,9 @@ class ChatAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Padding(
+      child: Container(
         padding: const EdgeInsets.only(top: 12, bottom: 26),
+        margin: const EdgeInsets.only(bottom: 10),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
@@ -20,10 +21,26 @@ class ChatAppBar extends StatelessWidget {
               backgroundImage: const NetworkImage(
                 "https://images.unsplash.com/photo-1594751439417-df8aab2a0c11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
               ),
+              child: Stack(
+                children: const [
+                  Positioned(
+                    bottom: 0,
+                    right: 0,
+                    child: CircleAvatar(
+                      radius: 9,
+                      backgroundColor: kBgColor,
+                      child: CircleAvatar(
+                        radius: 7,
+                        backgroundColor: kOnlineColor,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
             const Spacer(),
             Container(
-              width: getProportionateScreenWidth(SizeConfig.screenWidth / 2.2),
+              width: getProportionateScreenWidth(SizeConfig.screenWidth / 2.5),
               height: 35,
               padding: const EdgeInsets.symmetric(horizontal: 10),
               decoration: BoxDecoration(

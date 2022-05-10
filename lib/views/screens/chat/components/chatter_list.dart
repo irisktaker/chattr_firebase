@@ -20,7 +20,7 @@ class ChatterUserList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: getProportionateScreenHeight(
-        (SizeConfig.screenHeight * 0.60) - (SizeConfig.appBarHeight + 70),
+        (SizeConfig.screenHeight * 0.60) - (SizeConfig.appBarHeight),
       ),
       width: getProportionateScreenWidth(SizeConfig.screenWidth),
       child: ListView(

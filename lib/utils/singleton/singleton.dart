@@ -1,9 +1,15 @@
 import 'package:chattr/models/user.dart';
+import 'package:intl/intl.dart';
+import 'package:chattr/models/recent_calls.dart';
 
+  
 class Singleton {
   Singleton();
 
   static final instance = Singleton();
+
+
+  var format = DateFormat.yMMMEd();
 
   List<User> usersList = [
     User(
@@ -87,6 +93,42 @@ class Singleton {
       profilePic:
           "https://images.unsplash.com/photo-1474447976065-67d23accb1e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=685&q=80",
       unreadMSG: 0,
+    ),
+  ];
+
+  List<RecentCalls> recentCallsList = [
+    RecentCalls(
+      profilePic:
+          "https://images.unsplash.com/photo-1627161683077-e34782c24d81?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=703&q=80",
+      username: "Beverly Gray",
+      date: DateFormat.yMMMEd().format(DateTime.now()),
+      missedCall: 0,
+      incomingCall: false,
+    ),
+    RecentCalls(
+      profilePic:
+          "https://images.unsplash.com/photo-1540569014015-19a7be504e3a?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=735&q=80",
+      username: "Beverly Gray",
+      date: DateFormat.yMMMEd().format(DateTime.now()),
+      missedCall: 2,
+      incomingCall: false,
+    ),
+    RecentCalls(
+      profilePic:
+          "https://images.unsplash.com/photo-1531123897727-8f129e1688ce?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=687&q=80",
+      username: "Beverly Gray",
+      date: DateFormat.yMMMEd().format(DateTime.now()),
+      missedCall: 0,
+      incomingCall: true,
+    ),
+    RecentCalls(
+      profilePic:
+          "https://images.unsplash.com/photo-1620932934088-fbdb2920e484?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=765&q=80",
+      username: "Beverly Gray",
+      date: DateFormat.yMMMEd().format(DateTime.now()),
+      missedCall: 3,
+      incomingCall: true,
+      videoCall: true,
     ),
   ];
 }
