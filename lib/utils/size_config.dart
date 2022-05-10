@@ -6,6 +6,7 @@ class SizeConfig {
   static late double screenHeight;
   static double? defaultSize;
   static Orientation? orientation;
+  static double appBarHeight = AppBar().preferredSize.height;
 
   void init(BuildContext context) {
     _mediaQueryData = MediaQuery.of(context);
