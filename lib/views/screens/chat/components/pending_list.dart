@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:chattr/utils/theme.dart';
 import 'package:chattr/utils/constants.dart';
 import 'package:chattr/utils/size_config.dart';
-import 'package:chattr/views/screens/chat_messages/chat_messages.dart';
+import 'package:chattr/views/screens/messages/messages_screen.dart';
 
 import '../chat_bloc.dart';
 

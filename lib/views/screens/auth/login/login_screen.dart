@@ -2,12 +2,12 @@
 
 import 'dart:ui';
 
-import 'package:chattr/views/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chattr/utils/theme.dart';
 import 'package:chattr/utils/constants.dart';
 import 'package:chattr/utils/size_config.dart';
+import 'package:chattr/views/screens/bottom_navigation_bar.dart';
 import 'package:chattr/views/widgets/custom_box_blur_container.dart';
 
 import 'login_bloc.dart';
@@ -199,7 +199,7 @@ class SetupProfileSection extends StatelessWidget {
                     if (_bloc.usernameController.text.isNotEmpty) {
                       Navigator.pushReplacementNamed(
                         context,
-                        ChatScreen.routeScreen,
+                        BottomNavigationBarTabs.routeScreen,
                       );
                     } else {
                       final snackBar = SnackBar(

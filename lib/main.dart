@@ -1,6 +1,7 @@
-import 'package:chattr/views/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
+
 import 'package:chattr/routes/routes.dart';
+import 'views/screens/bottom_navigation_bar.dart';
 
 void main() {
   runApp(const MyApp());
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: ChatScreen.routeScreen,
+      initialRoute: BottomNavigationBarTabs.routeScreen,
       routes: routes,
     );
   }
