@@ -1,6 +1,7 @@
+import 'package:flutter/material.dart';
+
 import 'package:chattr/utils/constants.dart';
 import 'package:chattr/utils/size_config.dart';
-import 'package:flutter/material.dart';
 
 class ChatAppBar extends StatelessWidget {
   const ChatAppBar({Key? key}) : super(key: key);

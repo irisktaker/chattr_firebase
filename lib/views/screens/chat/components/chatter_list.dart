@@ -7,7 +7,7 @@ import 'package:chattr/utils/size_config.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:chattr/views/screens/chat_messages/chat_messages.dart';
 
-import 'chat_bloc.dart';
+import '../chat_bloc.dart';
 
 final _bloc = ChatBloc();
 
@@ -58,7 +58,14 @@ class ChatterUserList extends StatelessWidget {
                         dismissible: DismissiblePane(onDismissed: () {}),
                         children: [
                           SlidableAction(
-                            onPressed: (value) {},
+                            onPressed: (value) {
+                              // TODO: Make dynamic changing between pending and chatter
+
+                              // setState(() {
+                              //   _bloc.chattersList[index].isPending =
+                              //       !_bloc.chattersList[index].isPending;
+                              // });
+                            },
                             backgroundColor: kLightGreen,
                             foregroundColor: kBgColor,
                             icon: Icons.pin_drop,

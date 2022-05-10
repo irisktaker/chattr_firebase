@@ -73,5 +73,20 @@ class Singleton {
       unreadMSG: 0,
       isPending: true,
     ),
+    User(
+      username: "Josef Mike",
+      message: "In the world of shit ....",
+      profilePic:
+          "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
+      unreadMSG: 0,
+      isPending: true,
+    ),
+    User(
+      username: "Angry Bird",
+      message: "Fly and die",
+      profilePic:
+          "https://images.unsplash.com/photo-1474447976065-67d23accb1e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=685&q=80",
+      unreadMSG: 0,
+    ),
   ];
 }

@@ -1,5 +1,4 @@
 import 'package:chattr/views/screens/chat/chat_screen.dart';
-import 'package:chattr/views/screens/chat_messages/chat_messages.dart';
 import 'package:chattr/views/screens/splash/splash_screen.dart';
 import 'package:flutter/material.dart';
 

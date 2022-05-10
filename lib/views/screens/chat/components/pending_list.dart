@@ -6,7 +6,7 @@ import 'package:chattr/utils/constants.dart';
 import 'package:chattr/utils/size_config.dart';
 import 'package:chattr/views/screens/chat_messages/chat_messages.dart';
 
-import 'chat_bloc.dart';
+import '../chat_bloc.dart';
 
 final _bloc = ChatBloc();
 
