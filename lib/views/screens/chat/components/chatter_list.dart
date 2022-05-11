@@ -20,7 +20,7 @@ class ChatterUserList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: getProportionateScreenHeight(
-        (SizeConfig.screenHeight * 0.60) - (SizeConfig.appBarHeight),
+        (SizeConfig.screenHeight * 0.60) - (SizeConfig.appBarHeight + 75),
       ),
       width: getProportionateScreenWidth(SizeConfig.screenWidth),
       child: ListView(
@@ -42,8 +42,8 @@ class ChatterUserList extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) {
                           return ChatMessagesScreen(
-                            // userIndex: index,
-                          );
+                              // userIndex: index,
+                              );
                         },
                       ),
                     );

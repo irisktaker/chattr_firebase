@@ -64,7 +64,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
         children: [
           MaterialButton(
             onPressed: () {
-              // TODO: ___ 
+              // TODO: ___
             },
             child: const Text(
               "Delete Photo",

@@ -2,12 +2,10 @@ import 'package:chattr/models/user.dart';
 import 'package:intl/intl.dart';
 import 'package:chattr/models/recent_calls.dart';
 
-  
 class Singleton {
   Singleton();
 
   static final instance = Singleton();
-
 
   var format = DateFormat.yMMMEd();
 
@@ -86,7 +84,7 @@ class Singleton {
           "https://images.unsplash.com/photo-1511367461989-f85a21fda167?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1331&q=80",
       unreadMSG: 0,
       isPending: true,
-    ),
+    ), 
     User(
       username: "Angry Bird",
       message: "Fly and die",

@@ -13,7 +13,7 @@ import 'package:chattr/views/screens/bottom_navigation_bar.dart';
 import 'package:chattr/views/widgets/custom_box_blur_container.dart';
 
 import 'login_bloc.dart';
-
+final _bloc = LoginBloc();
 class FormLogin extends StatelessWidget {
   FormLogin({
     Key? key,
@@ -48,9 +48,8 @@ class FormLogin extends StatelessWidget {
 }
 
 class EmailSection extends StatelessWidget {
-  EmailSection({Key? key}) : super(key: key);
+  const EmailSection({Key? key}) : super(key: key);
   static const routeScreen = 'email_section';
-  final _bloc = LoginBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -123,9 +122,8 @@ class EmailSection extends StatelessWidget {
 }
 
 class PasswordSection extends StatelessWidget {
-  PasswordSection({Key? key}) : super(key: key);
+  const PasswordSection({Key? key}) : super(key: key);
   static const routeScreen = 'password_section';
-  final _bloc = LoginBloc();
 
   @override
   Widget build(BuildContext context) {
@@ -177,7 +175,6 @@ class PasswordSection extends StatelessWidget {
 class SetupProfileSection extends StatelessWidget {
   SetupProfileSection({Key? key}) : super(key: key);
   static const routeScreen = 'setup_profile_section';
-  final _bloc = LoginBloc();
 
   File? _userImageFile;
 

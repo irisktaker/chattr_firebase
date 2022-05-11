@@ -4,8 +4,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:chattr/utils/theme.dart';
 import 'package:chattr/utils/constants.dart';
 import 'package:chattr/utils/size_config.dart';
-import 'package:chattr/views/widgets/messages/messages.dart';
-import 'package:chattr/views/widgets/messages/new_message.dart';
+import 'package:chattr/views/screens/messages/components/messages.dart';
+import 'package:chattr/views/screens/messages/components/new_message.dart';
 
 class ChatMessagesScreen extends StatelessWidget {
   const ChatMessagesScreen({Key? key}) : super(key: key);

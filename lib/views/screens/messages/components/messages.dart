@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-import 'package:chattr/views/widgets/messages/message_bubble.dart';
+import 'package:chattr/views/screens/messages/components/message_bubble.dart';
 
 class MessageWidget extends StatelessWidget {
   const MessageWidget({Key? key}) : super(key: key);
