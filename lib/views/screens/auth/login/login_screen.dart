@@ -1,7 +1,9 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
 import 'dart:ui';
 
+import 'package:chattr/views/widgets/pic/image_picker.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chattr/utils/theme.dart';
@@ -177,6 +179,12 @@ class SetupProfileSection extends StatelessWidget {
   static const routeScreen = 'setup_profile_section';
   final _bloc = LoginBloc();
 
+  File? _userImageFile;
+
+  void _pickedImage(File pickedImage) {
+    _userImageFile = pickedImage;
+  }
+
   @override
   Widget build(BuildContext context) {
     return FormLogin(
@@ -217,20 +225,24 @@ class SetupProfileSection extends StatelessWidget {
                   head2: Column(
                     children: [
                       const SizedBox(height: 16),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          IconButton(
-                              onPressed: () {},
-                              icon: const Icon(
-                                Icons.photo_camera_back_outlined,
-                                color: kPrimaryColor,
-                              )),
-                          Text(
-                            "Edit display image",
-                            style: subtitleStyle,
-                          ),
-                        ],
+                      MaterialButton(
+                        onPressed: () {
+                          // TODO::
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            const Icon(
+                              Icons.photo_camera_back_outlined,
+                              color: kPrimaryColor,
+                            ),
+                            const SizedBox(width: 10),
+                            Text(
+                              "Edit display image",
+                              style: subtitleStyle,
+                            ),
+                          ],
+                        ),
                       ),
                     ],
                   ),
@@ -247,17 +259,7 @@ class SetupProfileSection extends StatelessWidget {
                 borderRadius: BorderRadius.circular(60),
                 child: BackdropFilter(
                   filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
-                  child: CircleAvatar(
-                    radius: 60,
-                    backgroundColor: Colors.white.withOpacity(0.4),
-                    child: CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Colors.white.withOpacity(0.4),
-                      backgroundImage: const NetworkImage(
-                        "https://images.unsplash.com/photo-1594751439417-df8aab2a0c11?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-                      ),
-                    ),
-                  ),
+                  child: ImagePickerWidget(_pickedImage),
                 ),
               ),
             ),
