@@ -1,10 +1,11 @@
 // ignore_for_file: must_be_immutable
 
+import 'package:chattr/views/screens/messages/messages_screen.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chattr/utils/constants.dart';
 import 'package:chattr/utils/size_config.dart';
-import 'package:chattr/views/widgets/chat_app_bar.dart';
+import 'package:chattr/views/widgets/chat/chat_app_bar.dart';
 import 'package:chattr/views/screens/chat/components/pending_list.dart';
 import 'package:chattr/views/screens/chat/components/chatter_list.dart';
 
@@ -32,16 +33,18 @@ class ChatScreen extends StatelessWidget {
             ),
           ),
         ),
-        floatingActionButton: _floatingActionButton(),
+        floatingActionButton: _floatingActionButton(context),
       ),
     );
   }
 
-  _floatingActionButton() {
+  _floatingActionButton(context) {
     return FloatingActionButton(
       backgroundColor: kPrimaryColor,
       foregroundColor: kIconsBorder,
-      onPressed: () {},
+      onPressed: () {
+        Navigator.pushNamed(context, ChatMessagesScreen.routeScreen);
+      },
       child: const Icon(
         Icons.chat_bubble_outline,
         size: 28,

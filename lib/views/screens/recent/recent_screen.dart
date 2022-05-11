@@ -6,7 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:chattr/utils/theme.dart';
 import 'package:chattr/utils/constants.dart';
 import 'package:chattr/utils/size_config.dart';
-import 'package:chattr/views/widgets/chat_app_bar.dart';
+import 'package:chattr/views/widgets/chat/chat_app_bar.dart';
 import 'package:chattr/views/screens/recent/recent_bloc.dart';
 
 var _bloc = RecentBloc();
