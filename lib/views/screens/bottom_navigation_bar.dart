@@ -39,7 +39,7 @@ class _BottomNavigationBarTabsState extends State<BottomNavigationBarTabs> {
         topRight: Radius.circular(50),
       ),
       child: BackdropFilter(
-        filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 26.0),
+        filter: ImageFilter.blur(sigmaX: 6.0, sigmaY: 6.0),
         child: Opacity(
           opacity: 0.8,
           child: Container(
@@ -47,7 +47,7 @@ class _BottomNavigationBarTabsState extends State<BottomNavigationBarTabs> {
             margin: const EdgeInsets.symmetric(horizontal: 33),
             padding: const EdgeInsets.symmetric(horizontal: 33),
             decoration: BoxDecoration(
-              color: kSecondaryColor.withOpacity(0.1),
+              color: kSecondaryColor.withOpacity(0.2),
               borderRadius: const BorderRadius.only(
                 topLeft: Radius.circular(50),
                 topRight: Radius.circular(50),
