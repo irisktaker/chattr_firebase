@@ -2,9 +2,9 @@
 
 import 'dart:ui';
 
-import 'package:chattr/utils/constants.dart';
-import 'package:chattr/utils/size_config.dart';
-import 'package:chattr/utils/theme.dart';
+import 'package:chattr/shared/constants.dart';
+import 'package:chattr/shared/size_config.dart';
+import 'package:chattr/shared/theme.dart';
 import 'package:flutter/material.dart';
 
 class CustomBoxBlurContainer extends StatelessWidget {

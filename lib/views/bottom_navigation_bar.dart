@@ -1,12 +1,13 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:chattr/utils/constants.dart';
-import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
 
-import 'chat/chat_screen.dart';
-import 'nearby/nearby_screen.dart';
-import 'recent/recent_screen.dart';
+import 'package:chattr/shared/constants.dart';
+import 'package:salomon_bottom_bar/salomon_bottom_bar.dart';
+import 'package:chattr/views/screens/chat/chat_screen.dart';
+import 'package:chattr/views/screens/nearby/nearby_screen.dart';
+import 'package:chattr/views/screens/recent/recent_screen.dart';
+
 
 class BottomNavigationBarTabs extends StatefulWidget {
   const BottomNavigationBarTabs({Key? key}) : super(key: key);

@@ -1,5 +1,5 @@
-import 'package:chattr/views/screens/nearby/nearby_bloc.dart';
 import 'package:flutter/material.dart';
+import 'package:chattr/views/screens/nearby/nearby_bloc.dart';
 
 var _bloc = NearbyBloc();
 

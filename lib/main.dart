@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+
+import 'shared/routes/routes.dart';
+import 'package:flutter/services.dart';
 import 'package:chattr/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
-
-import 'package:flutter/services.dart';
-import 'package:chattr/routes/routes.dart';
-import 'views/screens/bottom_navigation_bar.dart';
+import 'package:chattr/views/bottom_navigation_bar.dart';
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(

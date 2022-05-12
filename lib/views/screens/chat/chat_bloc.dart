@@ -1,5 +1,5 @@
 import 'package:chattr/models/user.dart';
-import 'package:chattr/utils/singleton/singleton.dart';
+import 'package:chattr/shared/utils/singleton/singleton.dart';
 
 class ChatBloc {
   List<User> chattersList =

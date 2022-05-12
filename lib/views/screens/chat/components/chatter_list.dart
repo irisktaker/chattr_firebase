@@ -1,9 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:chattr/utils/theme.dart';
-import 'package:chattr/utils/constants.dart';
-import 'package:chattr/utils/size_config.dart';
+
+import 'package:chattr/shared/theme.dart';
+import 'package:chattr/shared/constants.dart';
+import 'package:chattr/shared/size_config.dart';
 import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:chattr/views/screens/messages/messages_screen.dart';
 
@@ -20,7 +21,7 @@ class ChatterUserList extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
       height: getProportionateScreenHeight(
-        (SizeConfig.screenHeight * 0.60) - (SizeConfig.appBarHeight + 75),
+        (SizeConfig.screenHeight * 0.60) - (SizeConfig.appBarHeight),
       ),
       width: getProportionateScreenWidth(SizeConfig.screenWidth),
       child: ListView(

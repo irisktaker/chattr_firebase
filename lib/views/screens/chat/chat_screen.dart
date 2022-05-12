@@ -1,11 +1,11 @@
 // ignore_for_file: must_be_immutable
 
-import 'package:chattr/views/screens/messages/messages_screen.dart';
 import 'package:flutter/material.dart';
 
-import 'package:chattr/utils/constants.dart';
-import 'package:chattr/utils/size_config.dart';
-import 'package:chattr/views/widgets/chat/chat_app_bar.dart';
+import 'package:chattr/shared/constants.dart';
+import 'package:chattr/shared/size_config.dart';
+import 'package:chattr/shared/widgets/chat/chat_app_bar.dart';
+import 'package:chattr/views/screens/messages/messages_screen.dart';
 import 'package:chattr/views/screens/chat/components/pending_list.dart';
 import 'package:chattr/views/screens/chat/components/chatter_list.dart';
 

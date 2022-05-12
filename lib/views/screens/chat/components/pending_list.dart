@@ -1,9 +1,10 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:chattr/utils/theme.dart';
-import 'package:chattr/utils/constants.dart';
-import 'package:chattr/utils/size_config.dart';
+
+import 'package:chattr/shared/theme.dart';
+import 'package:chattr/shared/constants.dart';
+import 'package:chattr/shared/size_config.dart';
 import 'package:chattr/views/screens/messages/messages_screen.dart';
 
 import '../chat_bloc.dart';
@@ -43,8 +44,8 @@ class PendingUserList extends StatelessWidget {
                       MaterialPageRoute(
                         builder: (context) {
                           return ChatMessagesScreen(
-                            // userIndex: index,
-                          );
+                              // userIndex: index,
+                              );
                         },
                       ),
                     );

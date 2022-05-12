@@ -1,9 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-import 'package:chattr/utils/theme.dart';
-import 'package:chattr/utils/constants.dart';
-import 'package:chattr/utils/size_config.dart';
+import 'package:chattr/shared/theme.dart';
+import 'package:chattr/shared/constants.dart';
 import 'package:chattr/views/screens/messages/components/messages.dart';
 import 'package:chattr/views/screens/messages/components/new_message.dart';
 

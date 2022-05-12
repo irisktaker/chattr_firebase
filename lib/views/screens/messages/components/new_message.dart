@@ -1,7 +1,6 @@
-import 'package:chattr/utils/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:chattr/shared/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class NewMessageWidget extends StatefulWidget {

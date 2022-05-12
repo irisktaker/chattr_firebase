@@ -1,5 +1,7 @@
-import 'package:chattr/utils/constants.dart';
+
 import 'package:flutter/material.dart';
+
+import 'constants.dart';
 
 TextStyle headerStyle = const TextStyle(
   color: kPrimaryColor,

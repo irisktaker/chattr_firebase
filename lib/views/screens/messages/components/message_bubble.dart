@@ -1,6 +1,8 @@
-import 'package:chattr/utils/constants.dart';
-import 'package:chattr/utils/size_config.dart';
+
 import 'package:flutter/material.dart';
+
+import 'package:chattr/shared/constants.dart';
+import 'package:chattr/shared/size_config.dart';
 
 class MessageBubbleWidget extends StatelessWidget {
   const MessageBubbleWidget(this.message,

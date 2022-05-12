@@ -1,11 +1,10 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-
-import 'package:chattr/utils/theme.dart';
-import 'package:chattr/utils/constants.dart';
-import 'package:chattr/utils/size_config.dart';
-import 'package:chattr/views/screens/auth/login/login_screen.dart';
+import 'package:chattr/shared/theme.dart';
+import 'package:chattr/shared/constants.dart';
+import 'package:chattr/shared/size_config.dart';
+import 'package:chattr/views/screens/auth/components/email_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);

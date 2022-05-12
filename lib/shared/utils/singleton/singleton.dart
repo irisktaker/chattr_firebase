@@ -1,5 +1,6 @@
-import 'package:chattr/models/user.dart';
+
 import 'package:intl/intl.dart';
+import 'package:chattr/models/user.dart';
 import 'package:chattr/models/recent_calls.dart';
 
 class Singleton {

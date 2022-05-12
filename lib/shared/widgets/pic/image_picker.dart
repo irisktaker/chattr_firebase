@@ -1,8 +1,7 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:chattr/utils/theme.dart';
-import 'package:chattr/utils/constants.dart';
+import 'package:chattr/shared/constants.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ImagePickerWidget extends StatefulWidget {

@@ -1,12 +1,12 @@
 import 'dart:ui';
 
-import 'package:chattr/utils/singleton/singleton.dart';
 import 'package:flutter/material.dart';
 
-import 'package:chattr/utils/theme.dart';
-import 'package:chattr/utils/constants.dart';
-import 'package:chattr/utils/size_config.dart';
-import 'package:chattr/views/widgets/chat/chat_app_bar.dart';
+import 'package:chattr/shared/theme.dart';
+import 'package:chattr/shared/constants.dart';
+import 'package:chattr/shared/size_config.dart';
+import 'package:chattr/shared/widgets/chat/chat_app_bar.dart';
+import 'package:chattr/shared/utils/singleton/singleton.dart';
 import 'package:chattr/views/screens/recent/recent_bloc.dart';
 
 var _bloc = RecentBloc();
