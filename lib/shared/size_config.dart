@@ -16,8 +16,6 @@ class SizeConfig {
   }
 }
 
-const kPadding = 16.0;
-
 // Get the proportionate height as per screen size
 double getProportionateScreenHeight(double inputHeight) {
   double screenHeight = SizeConfig.screenHeight;

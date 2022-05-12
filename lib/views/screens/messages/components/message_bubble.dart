@@ -12,6 +12,7 @@ class MessageBubbleWidget extends StatelessWidget {
       {this.key})
       : super(key: key);
 
+  @override
   final Key? key;
   final String message;
   // final String username;

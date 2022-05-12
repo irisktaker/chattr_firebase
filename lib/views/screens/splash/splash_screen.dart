@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:chattr/shared/theme.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
-import 'package:chattr/views/screens/auth/components/email_screen.dart';
+import 'package:chattr/views/screens/auth/login/login_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
 
     Timer(
       const Duration(seconds: 3),
-      () => Navigator.pushReplacementNamed(context, EmailSection.routeScreen),
+      () => Navigator.pushReplacementNamed(context, LoginScreen.routeScreen),
     );
   }
 

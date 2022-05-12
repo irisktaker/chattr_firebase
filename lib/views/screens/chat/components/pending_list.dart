@@ -43,7 +43,7 @@ class PendingUserList extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) {
-                          return ChatMessagesScreen(
+                          return const ChatMessagesScreen(
                               // userIndex: index,
                               );
                         },

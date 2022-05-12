@@ -235,7 +235,7 @@ class RecentScreen extends StatelessWidget {
                           ),
                         ),
                         const Spacer(),
-                        Text("24:07"),
+                        const Text("24:07"),
                       ],
                     ),
                     const SizedBox(height: 24),

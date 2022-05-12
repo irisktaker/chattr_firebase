@@ -29,8 +29,8 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      // initialRoute: '/',
-      initialRoute: BottomNavigationBarTabs.routeScreen,
+      initialRoute: '/',
+      // initialRoute: BottomNavigationBarTabs.routeScreen,
       routes: routes,
     );
   }

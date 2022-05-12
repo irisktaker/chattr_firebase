@@ -11,10 +11,7 @@ class MessageWidget extends StatelessWidget {
     return StreamBuilder(
       stream: FirebaseFirestore.instance
           .collection('chat_messages')
-          .orderBy(
-            'sent_at',
-            descending: true,
-          )
+          .orderBy('sent_at', descending: true)
           .snapshots(),
       builder: (context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
