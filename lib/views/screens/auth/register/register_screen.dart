@@ -8,8 +8,8 @@ import 'package:flutter/material.dart';
 import 'package:chattr/shared/theme.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
+import 'package:chattr/views/bottom_navigation_bar.dart';
 import 'package:chattr/views/screens/auth/auth_bloc.dart';
-import 'package:chattr/views/screens/chat/chat_screen.dart';
 import 'package:chattr/shared/widgets/pic/image_picker.dart';
 import 'package:chattr/shared/widgets/auth/custom_button.dart';
 import 'package:chattr/shared/widgets/auth/custom_text_field.dart';
@@ -105,7 +105,7 @@ class RegisterScreen extends StatelessWidget {
                                 _bloc.usernameController.text.isNotEmpty) {
                               Navigator.pushNamed(
                                 context,
-                                ChatScreen.routeScreen,
+                                BottomNavigationBarTabs.routeScreen,
                               );
                             } else {
                               final snackBar = SnackBar(

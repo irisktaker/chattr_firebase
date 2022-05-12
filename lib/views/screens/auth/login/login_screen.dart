@@ -5,8 +5,8 @@ import 'package:flutter/material.dart';
 import 'package:chattr/shared/theme.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
+import 'package:chattr/views/bottom_navigation_bar.dart';
 import 'package:chattr/views/screens/auth/auth_bloc.dart';
-import 'package:chattr/views/screens/chat/chat_screen.dart';
 import 'package:chattr/shared/widgets/auth/custom_button.dart';
 import 'package:chattr/shared/widgets/auth/custom_text_field.dart';
 import 'package:chattr/shared/widgets/custom_box_blur_container.dart';
@@ -72,7 +72,7 @@ class LoginScreen extends StatelessWidget {
                           if (_bloc.emailController.text.isNotEmpty) {
                             Navigator.pushNamed(
                               context,
-                              ChatScreen.routeScreen,
+                              BottomNavigationBarTabs.routeScreen,
                             );
                           } else {
                             final snackBar = SnackBar(
