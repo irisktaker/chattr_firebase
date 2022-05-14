@@ -43,7 +43,11 @@ class ChatScreen extends StatelessWidget {
       backgroundColor: kPrimaryColor,
       foregroundColor: kIconsBorder,
       onPressed: () {
-        Navigator.pushNamed(context, ChatMessagesScreen.routeScreen);
+        // Navigator.pushNamed(context, ChatMessagesScreen.routeScreen);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const ChatMessagesScreen()));
       },
       child: const Icon(
         Icons.chat_bubble_outline,

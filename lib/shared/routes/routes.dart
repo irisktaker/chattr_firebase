@@ -10,7 +10,7 @@ import 'package:chattr/views/screens/auth/register/register_screen.dart';
 Map<String, WidgetBuilder> routes = {
   '/': (context) => const SplashScreen(),
   LoginScreen.routeScreen: (context) => LoginScreen(),
-  RegisterScreen.routeScreen: (context) => RegisterScreen(),
+  // RegisterScreen.routeScreen: (context) => RegisterScreen(),
   BottomNavigationBarTabs.routeScreen: (context) =>
       const BottomNavigationBarTabs(),
   ChatScreen.routeScreen: (context) => const ChatScreen(),

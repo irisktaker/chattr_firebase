@@ -3,14 +3,22 @@
 import 'package:chattr/shared/constants.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextField extends StatelessWidget {
-  CustomTextField({
+class CustomTextFormField extends StatelessWidget {
+  CustomTextFormField({
     Key? key,
     required this.controller,
     required this.hintText,
+    required this.validator,
+    required this.onSaved,
+    required this.keyboardType,
+    this.obscureText = false,
   }) : super(key: key);
 
   TextEditingController controller = TextEditingController();
+  String? Function(String?)? validator;
+  void Function(String?)? onSaved;
+  TextInputType? keyboardType;
+  bool obscureText;
   String? hintText;
 
   @override
@@ -21,8 +29,13 @@ class CustomTextField extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         color: kBgColor.withOpacity(0.65),
       ),
-      child: TextField(
+      child: TextFormField(
+        key: key,
         controller: controller,
+        validator: validator,
+        onSaved: onSaved,
+        keyboardType: keyboardType,
+        obscureText: obscureText,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: const TextStyle(

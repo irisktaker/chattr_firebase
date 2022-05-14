@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'shared/routes/routes.dart';
 import 'package:flutter/services.dart';
 import 'package:chattr/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:chattr/views/bottom_navigation_bar.dart';
+import 'package:chattr/views/screens/auth/login/login_screen.dart';
 
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
@@ -29,9 +31,19 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      initialRoute: '/',
       // initialRoute: BottomNavigationBarTabs.routeScreen,
-      routes: routes,
+      // initialRoute: '/',
+      home: StreamBuilder(
+        stream: FirebaseAuth.instance.authStateChanges(),
+        builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.hasData) {
+            return const BottomNavigationBarTabs();
+          } else {
+            return LoginScreen();
+          }
+        },
+      ),
+      // routes: routes,
     );
   }
 }
