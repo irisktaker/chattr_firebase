@@ -37,6 +37,7 @@ class RegisterScreen extends StatelessWidget {
       _authController.signUp(
         context,
         email: _bloc.emailController.text,
+        username: _bloc.usernameController.text,
         password: _bloc.passwordController.text,
         image: userImageFile,
       );

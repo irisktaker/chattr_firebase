@@ -1,13 +1,11 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:chattr/shared/theme.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
 import 'package:chattr/controllers/auth_controller.dart';
-import 'package:chattr/views/bottom_navigation_bar.dart';
 import 'package:chattr/shared/widgets/auth/custom_button.dart';
 import 'package:chattr/views/screens/auth/login/login_bloc.dart';
 import 'package:chattr/shared/widgets/auth/custom_text_field.dart';
@@ -16,16 +14,14 @@ import 'package:chattr/views/screens/auth/register/register_screen.dart';
 
 class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-  
+
   static const routeScreen = 'login_screen';
   final LoginBloc _bloc = LoginBloc();
 
   @override
   Widget build(BuildContext context) {
     AuthController _authController = AuthController();
-    UserCredential _userCrential;
     SizeConfig().init(context);
-    bool isLogin = false;
 
     _userSignIn() {
       _authController.signIn(

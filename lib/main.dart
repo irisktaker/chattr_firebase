@@ -1,3 +1,4 @@
+import 'package:chattr/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -34,8 +35,12 @@ class MyApp extends StatelessWidget {
       // initialRoute: BottomNavigationBarTabs.routeScreen,
       // initialRoute: '/',
       home: StreamBuilder(
-        stream: FirebaseAuth.instance.authStateChanges(),
+        stream: AuthController().authChanges,
         builder: (context, AsyncSnapshot snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          }
+
           if (snapshot.hasData) {
             return const BottomNavigationBarTabs();
           } else {

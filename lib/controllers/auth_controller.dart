@@ -1,43 +1,41 @@
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_storage/firebase_storage.dart';
 
 class AuthController {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  User? get user => _firebaseAuth.currentUser;
-  late UserCredential userCredential;
+  final _firebaseStore = FirebaseFirestore.instance;
+  Stream<User?> get authChanges => _firebaseAuth.authStateChanges();
+  User get user => _firebaseAuth.currentUser!;
 
   // SIGN UP METHOD
   Future signUp(BuildContext context,
-      {required String email, required String password, File? image}) async {
+      {required String email,
+      required String username,
+      required String password,
+      File? image}) async {
     try {
-      await _firebaseAuth.createUserWithEmailAndPassword(
+      UserCredential userCredential =
+          await _firebaseAuth.createUserWithEmailAndPassword(
         email: email,
         password: password,
       );
 
-      final Reference ref = FirebaseStorage.instance
-          .ref()
-          .child('user_image')
-          .child(userCredential.user!.uid + ".jpg");
+      User? user = userCredential.user;
 
-      await ref.putFile(image!);
-      final url = ref.getDownloadURL();
-
-      await FirebaseFirestore.instance
-          .collection('users_list')
-          .doc(userCredential.user!.uid)
-          .set(
-        {
-          'email': email,
-          'password': password,
-          'image_url': url,
-        },
-      );
+      if (user != null) {
+        // to not repeat the same user data
+        if (userCredential.additionalUserInfo!.isNewUser) {
+          // if new user we need to save the user in our firebase database
+          _firebaseStore.collection('users_list').doc(user.uid).set({
+            'username': user.displayName,
+            'uid': user.uid,
+            'user_image': user.photoURL,
+          });
+        }
+      }
     } on FirebaseAuthException catch (e) {
       String errorMessage = "Error Occurred";
 
