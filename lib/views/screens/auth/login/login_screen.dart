@@ -1,31 +1,39 @@
 // ignore_for_file: must_be_immutable
 
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:chattr/shared/theme.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
-import 'package:chattr/views/screens/auth/auth_bloc.dart';
+import 'package:chattr/controllers/auth_controller.dart';
+import 'package:chattr/views/bottom_navigation_bar.dart';
 import 'package:chattr/shared/widgets/auth/custom_button.dart';
+import 'package:chattr/views/screens/auth/login/login_bloc.dart';
 import 'package:chattr/shared/widgets/auth/custom_text_field.dart';
 import 'package:chattr/shared/widgets/custom_box_blur_container.dart';
 import 'package:chattr/views/screens/auth/register/register_screen.dart';
 
-class LoginScreen extends StatefulWidget {
-  static const routeScreen = 'login_screen';
-
+class LoginScreen extends StatelessWidget {
   LoginScreen({Key? key}) : super(key: key);
-
-  @override
-  State<LoginScreen> createState() => _LoginScreenState();
-}
-
-class _LoginScreenState extends State<LoginScreen> {
-  final _bloc = AuthBloc();
+  
+  static const routeScreen = 'login_screen';
+  final LoginBloc _bloc = LoginBloc();
 
   @override
   Widget build(BuildContext context) {
+    AuthController _authController = AuthController();
+    UserCredential _userCrential;
     SizeConfig().init(context);
+    bool isLogin = false;
+
+    _userSignIn() {
+      _authController.signIn(
+        context,
+        email: _bloc.emailController.text,
+        password: _bloc.passwordController.text,
+      );
+    }
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -72,7 +80,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           }
                           return null;
                         },
-                        onSaved: (val) => _bloc.email = val!,
+                        onSaved: (val) {},
                         keyboardType: TextInputType.emailAddress,
                         controller: _bloc.emailController,
                         hintText: "email",
@@ -87,19 +95,16 @@ class _LoginScreenState extends State<LoginScreen> {
                           return null;
                         },
                         obscureText: true,
-                        onSaved: (val) => _bloc.password = val!,
+                        onSaved: (val) {},
                         keyboardType: TextInputType.visiblePassword,
                         controller: _bloc.passwordController,
                         hintText: "password",
                       ),
                       const SizedBox(height: 16),
-                      _bloc.isLoading
-                          ? const CircularProgressIndicator()
-                          : CustomButton(
-                              onButtonPressed: () {
-                                // submit(context);
-                              },
-                              buttonTitle: "SingIn"),
+                      CustomButton(
+                        onButtonPressed: _userSignIn,
+                        buttonTitle: "SingIn",
+                      ),
                       const SizedBox(height: 10),
                       Row(
                         children: [
@@ -109,14 +114,11 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                           InkWell(
                             onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => RegisterScreen((email,
-                                            password,
-                                            username,
-                                            isLogin,
-                                            context) =>
-                                        null),),),
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => RegisterScreen(),
+                              ),
+                            ),
                             // Navigator.pushNamed(
                             //   context,
                             //   RegisterScreen.routeScreen,

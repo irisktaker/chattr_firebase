@@ -1,5 +1,6 @@
 // ignore_for_file: must_be_immutable
 
+import 'dart:io';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -7,54 +8,44 @@ import 'package:flutter/material.dart';
 import 'package:chattr/shared/theme.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
+import 'package:chattr/controllers/auth_controller.dart';
 import 'package:chattr/views/bottom_navigation_bar.dart';
-import 'package:chattr/views/screens/auth/auth_bloc.dart';
 import 'package:chattr/shared/widgets/pic/image_picker.dart';
 import 'package:chattr/shared/widgets/auth/custom_button.dart';
 import 'package:chattr/views/screens/auth/login/login_screen.dart';
 import 'package:chattr/shared/widgets/auth/custom_text_field.dart';
 import 'package:chattr/shared/widgets/custom_box_blur_container.dart';
+import 'package:chattr/views/screens/auth/register/register_bloc.dart';
 
-class RegisterScreen extends StatefulWidget {
+class RegisterScreen extends StatelessWidget {
+  RegisterScreen({Key? key}) : super(key: key);
+
   static const routeScreen = 'register_screen';
-
-  RegisterScreen(this.submitFun, {Key? key}) : super(key: key);
-
-  final void Function(
-    String email,
-    String password,
-    String username,
-    // File image,
-    bool isLogin,
-    BuildContext context,
-  ) submitFun;
-
-  @override
-  State<RegisterScreen> createState() => _RegisterScreenState();
-}
-
-class _RegisterScreenState extends State<RegisterScreen> {
-  final _bloc = AuthBloc();
-
-  void submit(BuildContext context) {
-    final _isValid = _bloc.formKey.currentState!.validate();
-    FocusScope.of(context).unfocus();
-    if (_isValid) {
-      _bloc.formKey.currentState!.save();
-
-      widget.submitFun(
-        _bloc.email.trim(),
-        _bloc.username.trim(),
-        _bloc.password.trim(),
-        _bloc.isLogin,
-        context,
-      );
-    }
-  }
+  final RegisterBloc _bloc = RegisterBloc();
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
+    AuthController _authController = AuthController();
+    File? userImageFile;
+
+    void _pickedImage(File pickedImage) {
+      userImageFile = pickedImage;
+    }
+
+    _userSignUp() {
+      _authController.signUp(
+        context,
+        email: _bloc.emailController.text,
+        password: _bloc.passwordController.text,
+        image: userImageFile,
+      );
+
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (context) => const BottomNavigationBarTabs()));
+    }
 
     return GestureDetector(
       onTap: () => FocusScope.of(context).unfocus(),
@@ -118,7 +109,8 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                               return null;
                             },
-                            onSaved: (val) => _bloc.username = val!,
+                            onSaved: (val) =>
+                                _bloc.usernameController.text = val!,
                             controller: _bloc.usernameController,
                             keyboardType: TextInputType.text,
                             hintText: "username",
@@ -132,7 +124,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               }
                               return null;
                             },
-                            onSaved: (val) => _bloc.email = val!,
+                            onSaved: (val) => _bloc.emailController.text = val!,
                             controller: _bloc.emailController,
                             keyboardType: TextInputType.emailAddress,
                             hintText: "email",
@@ -147,25 +139,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               return null;
                             },
                             obscureText: true,
-                            onSaved: (val) => _bloc.password = val!,
+                            onSaved: (val) =>
+                                _bloc.passwordController.text = val!,
                             keyboardType: TextInputType.visiblePassword,
                             controller: _bloc.passwordController,
                             hintText: "password",
                           ),
                           const SizedBox(height: 16),
-                          _bloc.isLoading
-                              ? const CircularProgressIndicator()
-                              : CustomButton(
-                                  onButtonPressed: () {
-                                    submit(context);
-                                    // Navigator.push(
-                                    //     context,
-                                    //     MaterialPageRoute(
-                                    //         builder: (context) =>
-                                    //             const BottomNavigationBarTabs()));
-                                  },
-                                  buttonTitle: "Register",
-                                ),
+                          CustomButton(
+                            onButtonPressed: _userSignUp,
+                            buttonTitle: "Register",
+                          ),
                           const SizedBox(height: 10),
                           Row(
                             children: [
@@ -229,7 +213,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   borderRadius: BorderRadius.circular(60),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
-                    child: ImagePickerWidget(_bloc.pickedImage),
+                    child: ImagePickerWidget(_pickedImage),
                   ),
                 ),
               ),

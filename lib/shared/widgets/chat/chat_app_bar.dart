@@ -1,13 +1,49 @@
 import 'package:flutter/material.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
-
+import 'package:chattr/controllers/auth_controller.dart';
 
 class ChatAppBar extends StatelessWidget {
   const ChatAppBar({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    final AuthController _authController = AuthController();
+
+    PopupMenuButton<dynamic> _popUpMenu(AuthController _authController) {
+      return PopupMenuButton(
+        shape: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide.none,
+        ),
+        itemBuilder: (context) {
+          return <PopupMenuEntry>[
+            const PopupMenuItem(
+              value: 0,
+              child: Text("My Account"),
+            ),
+            const PopupMenuItem<int>(
+              value: 1,
+              child: Text("Settings"),
+            ),
+            const PopupMenuItem<int>(
+              value: 2,
+              child: Text("Logout"),
+            ),
+          ];
+        },
+        onSelected: (value) {
+          if (value == 0) {
+            print("My Account");
+          } else if (value == 1) {
+            print("Settings");
+          } else {
+            _authController.signOut();
+          }
+        },
+      );
+    }
+
     return SafeArea(
       child: Container(
         padding: const EdgeInsets.only(top: 12, bottom: 26),
@@ -62,13 +98,7 @@ class ChatAppBar extends StatelessWidget {
                 ),
               ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Icon(
-                Icons.more_vert,
-                color: kSecondaryColor,
-              ),
-            ),
+            _popUpMenu(_authController),
           ],
         ),
       ),

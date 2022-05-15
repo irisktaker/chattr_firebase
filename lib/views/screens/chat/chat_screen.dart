@@ -28,6 +28,7 @@ class ChatScreen extends StatelessWidget {
               children: const [
                 ChatAppBar(),
                 PendingUserList(),
+                SizedBox(height: 10),
                 ChatterUserList(),
               ],
             ),
