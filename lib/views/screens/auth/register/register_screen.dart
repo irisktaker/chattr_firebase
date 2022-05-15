@@ -39,7 +39,6 @@ class RegisterScreen extends StatelessWidget {
         email: _bloc.emailController.text,
         username: _bloc.usernameController.text,
         password: _bloc.passwordController.text,
-        image: userImageFile,
       );
 
       Navigator.pushReplacement(

@@ -14,14 +14,11 @@ class AuthController {
   Future signUp(BuildContext context,
       {required String email,
       required String username,
-      required String password,
-      File? image}) async {
+      required String password}) async {
     try {
       UserCredential userCredential =
           await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+              email: email.trim(), password: password.trim());
 
       User? user = userCredential.user;
 
@@ -61,9 +58,7 @@ class AuthController {
       {required String email, required String password}) async {
     try {
       await _firebaseAuth.signInWithEmailAndPassword(
-        email: email,
-        password: password,
-      );
+          email: email.trim(), password: password.trim());
       return null;
     } on FirebaseAuthException catch (e) {
       String errorMessage = "Error Occurred";
