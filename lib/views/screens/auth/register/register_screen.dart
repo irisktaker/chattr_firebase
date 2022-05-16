@@ -1,6 +1,6 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:io';
+import 'dart:typed_data';
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
@@ -17,21 +17,24 @@ import 'package:chattr/shared/widgets/auth/custom_text_field.dart';
 import 'package:chattr/shared/widgets/custom_box_blur_container.dart';
 import 'package:chattr/views/screens/auth/register/register_bloc.dart';
 
-class RegisterScreen extends StatelessWidget {
+class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
 
   static const routeScreen = 'register_screen';
+
+  @override
+  State<RegisterScreen> createState() => _RegisterScreenState();
+}
+
+class _RegisterScreenState extends State<RegisterScreen> {
   final RegisterBloc _bloc = RegisterBloc();
+
+  Uint8List? image;
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     AuthController _authController = AuthController();
-    File? userImageFile;
-
-    void _pickedImage(File pickedImage) {
-      userImageFile = pickedImage;
-    }
 
     _userSignUp() {
       _authController.signUp(
@@ -39,6 +42,7 @@ class RegisterScreen extends StatelessWidget {
         email: _bloc.emailController.text,
         username: _bloc.usernameController.text,
         password: _bloc.passwordController.text,
+        image: image,
       );
 
       Navigator.pushReplacement(
@@ -213,7 +217,7 @@ class RegisterScreen extends StatelessWidget {
                   borderRadius: BorderRadius.circular(60),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
-                    child: ImagePickerWidget(_pickedImage),
+                    child: ImagePickerWidget(image: image),
                   ),
                 ),
               ),

@@ -1,38 +1,66 @@
-import 'dart:io';
+import 'dart:typed_data';
 
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:image_picker/image_picker.dart';
 
 class AuthController {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
   final _firebaseStore = FirebaseFirestore.instance;
+  final _firebaseStorage = FirebaseStorage.instance;
   Stream<User?> get authChanges => _firebaseAuth.authStateChanges();
-  User get user => _firebaseAuth.currentUser!;
+  User? get user => _firebaseAuth.currentUser!;
+
+  // function to add image to storage
+  _addImageToStorage(Uint8List? image) async {
+    Reference ref =
+        _firebaseStorage.ref().child('profileImage').child(user!.uid);
+    UploadTask uploadTask = ref.putData(image!);
+    TaskSnapshot taskSnapshot = await uploadTask;
+    String downloadUrl = await taskSnapshot.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  // function to enable users to pick an image
+  pickImage(ImageSource source) async {
+    final ImagePicker _imagePicker = ImagePicker();
+    XFile? _file = await _imagePicker.pickImage(source: source);
+
+    if (_file != null) {
+      return await _file.readAsBytes();
+    } else {
+      print('no image selected');
+    }
+  }
 
   // SIGN UP METHOD
-  Future signUp(BuildContext context,
-      {required String email,
-      required String username,
-      required String password}) async {
+  Future signUp(
+    BuildContext context, {
+    required String email,
+    required String username,
+    required String password,
+    Uint8List? image,
+  }) async {
     try {
-      UserCredential userCredential =
-          await _firebaseAuth.createUserWithEmailAndPassword(
-              email: email.trim(), password: password.trim());
+      if (email.isNotEmpty &&
+          username.isNotEmpty &&
+          username.isNotEmpty &&
+          image != null) {}
 
-      User? user = userCredential.user;
+      await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email.trim(),
+        password: password.trim(),
+      );
 
-      if (user != null) {
-        // to not repeat the same user data
-        if (userCredential.additionalUserInfo!.isNewUser) {
-          // if new user we need to save the user in our firebase database
-          _firebaseStore.collection('users_list').doc(user.uid).set({
-            'username': user.displayName,
-            'uid': user.uid,
-            'user_image': user.photoURL,
-          });
-        }
-      }
+      String downloadUrl = _addImageToStorage(image!);
+
+      await _firebaseStore.collection('users-list').doc(user!.uid).set({
+        'email': email,
+        'username': username,
+        'profileImage': downloadUrl,
+      });
     } on FirebaseAuthException catch (e) {
       String errorMessage = "Error Occurred";
 

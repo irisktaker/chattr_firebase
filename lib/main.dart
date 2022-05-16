@@ -1,11 +1,11 @@
-import 'package:chattr/controllers/auth_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 import 'shared/routes/routes.dart';
 import 'package:flutter/services.dart';
 import 'package:chattr/firebase_options.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:chattr/controllers/auth_controller.dart';
 import 'package:chattr/views/bottom_navigation_bar.dart';
 import 'package:chattr/views/screens/auth/login/login_screen.dart';
 
@@ -29,6 +29,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Chattr',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

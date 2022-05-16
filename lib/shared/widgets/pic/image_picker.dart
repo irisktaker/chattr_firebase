@@ -1,41 +1,32 @@
-import 'dart:io';
+// ignore_for_file: must_be_immutable
+
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:chattr/controllers/auth_controller.dart';
 
 class ImagePickerWidget extends StatefulWidget {
-  const ImagePickerWidget(
-    this.imagePickFn, {
-    Key? key,
-  }) : super(key: key);
+  ImagePickerWidget({Key? key, required this.image}) : super(key: key);
 
-  final void Function(File pickedImage) imagePickFn;
+  Uint8List? image;
 
   @override
   State<ImagePickerWidget> createState() => _ImagePickerWidgetState();
 }
 
 class _ImagePickerWidgetState extends State<ImagePickerWidget> {
-  File? _pickedImage;
-  final ImagePicker _picker = ImagePicker();
+  _pickedImageFromGallery() async {
+    Uint8List _image =
+        await AuthController().pickImage(ImageSource.gallery);
+    setState(() => widget.image = _image);
+  }
 
-  void _pickImage(ImageSource src) async {
-    final pickedImageFile = await _picker.pickImage(
-      source: src,
-      imageQuality: 50,
-      maxWidth: 150,
-    );
-
-    if (pickedImageFile != null) {
-      setState(() {
-        _pickedImage = File(pickedImageFile.path);
-      });
-
-      widget.imagePickFn(_pickedImage!);
-    } else {
-      print("No image selected");
-    }
+  _pickedImageFromCamera() async {
+    Uint8List _image =
+        await AuthController().pickImage(ImageSource.camera);
+    setState(() => widget.image = _image);
   }
 
   @override
@@ -47,12 +38,19 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
       child: CircleAvatar(
         radius: 60,
         backgroundColor: Colors.white.withOpacity(0.4),
-        child: CircleAvatar(
-          radius: 50,
-          backgroundColor: Colors.white.withOpacity(0.4),
-          backgroundImage:
-              _pickedImage != null ? FileImage(_pickedImage!) : null,
-        ),
+        child: widget.image != null
+            ? CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.white.withOpacity(0.4),
+                backgroundImage: MemoryImage(widget.image!),
+              )
+            : CircleAvatar(
+                radius: 50,
+                backgroundColor: Colors.white.withOpacity(0.4),
+                backgroundImage: const NetworkImage(
+                  "https://icon-library.com/images/default-user-icon/default-user-icon-13.jpg",
+                ),
+              ),
       ),
     );
   }
@@ -73,7 +71,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
           const Divider(),
           MaterialButton(
             onPressed: () {
-              _pickImage(ImageSource.camera);
+              _pickedImageFromCamera();
             },
             child: const Text(
               "Take Photo",
@@ -83,7 +81,7 @@ class _ImagePickerWidgetState extends State<ImagePickerWidget> {
           const Divider(),
           MaterialButton(
             onPressed: () {
-              _pickImage(ImageSource.gallery);
+              _pickedImageFromGallery();
             },
             child: const Text(
               "Choose Photo",
