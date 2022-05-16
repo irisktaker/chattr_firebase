@@ -1,21 +1,20 @@
 // ignore_for_file: must_be_immutable
 
-import 'dart:typed_data';
 import 'dart:ui';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-
 import 'package:chattr/shared/theme.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
 import 'package:chattr/controllers/auth_controller.dart';
-import 'package:chattr/views/bottom_navigation_bar.dart';
 import 'package:chattr/shared/widgets/pic/image_picker.dart';
 import 'package:chattr/shared/widgets/auth/custom_button.dart';
 import 'package:chattr/views/screens/auth/login/login_screen.dart';
 import 'package:chattr/shared/widgets/auth/custom_text_field.dart';
 import 'package:chattr/shared/widgets/custom_box_blur_container.dart';
 import 'package:chattr/views/screens/auth/register/register_bloc.dart';
+import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -31,24 +30,74 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   Uint8List? image;
 
+  _pickedImageFromGallery() async {
+    Uint8List _image = await AuthController().pickImage(ImageSource.gallery);
+    setState(() => image = _image);
+  }
+
+  _pickedImageFromCamera() async {
+    Uint8List _image = await AuthController().pickImage(ImageSource.camera);
+    setState(() => image = _image);
+  }
+
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-    AuthController _authController = AuthController();
 
-    _userSignUp() {
-      _authController.signUp(
-        context,
-        email: _bloc.emailController.text,
-        username: _bloc.usernameController.text,
-        password: _bloc.passwordController.text,
-        image: image,
+    showAlertDialog() {
+      AlertDialog alert = AlertDialog(
+        title: Column(
+          children: [
+            MaterialButton(
+              onPressed: () {
+                // TODO: ___
+              },
+              child: const Text(
+                "Delete Photo",
+                style: TextStyle(color: Colors.red, fontSize: 18),
+              ),
+            ),
+            const Divider(),
+            MaterialButton(
+              onPressed: () {
+                _pickedImageFromCamera();
+              },
+              child: const Text(
+                "Take Photo",
+                style: TextStyle(color: kPrimaryColor, fontSize: 18),
+              ),
+            ),
+            const Divider(),
+            MaterialButton(
+              onPressed: () {
+                _pickedImageFromGallery();
+              },
+              child: const Text(
+                "Choose Photo",
+                style: TextStyle(color: kPrimaryColor, fontSize: 18),
+              ),
+            ),
+            const Divider(),
+            MaterialButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              child: const Text(
+                "Cancel",
+                style: TextStyle(color: kPrimaryColor, fontSize: 18),
+              ),
+            ),
+          ],
+        ),
       );
 
-      Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(
-              builder: (context) => const BottomNavigationBarTabs()));
+      // show the dialog
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return alert;
+        },
+      );
     }
 
     return GestureDetector(
@@ -86,6 +135,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                               MaterialButton(
                                 onPressed: () {
                                   // TODO:
+                                  showAlertDialog();
                                 },
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
@@ -151,7 +201,15 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           ),
                           const SizedBox(height: 16),
                           CustomButton(
-                            onButtonPressed: _userSignUp,
+                            onButtonPressed: () async {
+                              await AuthController().signUp(
+                                // context,
+                                _bloc.emailController.text,
+                                _bloc.usernameController.text,
+                                _bloc.passwordController.text,
+                                image,
+                              );
+                            },
                             buttonTitle: "Register",
                           ),
                           const SizedBox(height: 10),
@@ -217,7 +275,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   borderRadius: BorderRadius.circular(60),
                   child: BackdropFilter(
                     filter: ImageFilter.blur(sigmaX: 16.0, sigmaY: 16.0),
-                    child: ImagePickerWidget(image: image),
+                    child: ImagePickerWidget(
+                      image: image,
+                    ),
                   ),
                 ),
               ),

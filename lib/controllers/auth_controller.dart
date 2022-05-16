@@ -8,15 +8,17 @@ import 'package:image_picker/image_picker.dart';
 
 class AuthController {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
-  final _firebaseStore = FirebaseFirestore.instance;
-  final _firebaseStorage = FirebaseStorage.instance;
+  final FirebaseStorage _firebaseStorage = FirebaseStorage.instance;
+  final FirebaseFirestore _firebaseStore = FirebaseFirestore.instance;
   Stream<User?> get authChanges => _firebaseAuth.authStateChanges();
-  User? get user => _firebaseAuth.currentUser!;
 
   // function to add image to storage
   _addImageToStorage(Uint8List? image) async {
-    Reference ref =
-        _firebaseStorage.ref().child('profileImage').child(user!.uid);
+    Reference ref = _firebaseStorage
+        .ref()
+        .child('profileImage')
+        .child(_firebaseAuth.currentUser!.uid);
+
     UploadTask uploadTask = ref.putData(image!);
     TaskSnapshot taskSnapshot = await uploadTask;
     String downloadUrl = await taskSnapshot.ref.getDownloadURL();
@@ -37,30 +39,35 @@ class AuthController {
 
   // SIGN UP METHOD
   Future signUp(
-    BuildContext context, {
-    required String email,
-    required String username,
-    required String password,
+    // BuildContext context,
+    String email,
+    String username,
+    String password,
     Uint8List? image,
-  }) async {
+  ) async {
     try {
       if (email.isNotEmpty &&
           username.isNotEmpty &&
           username.isNotEmpty &&
-          image != null) {}
+          image != null) {
+        UserCredential userCredential = await _firebaseAuth
+            .createUserWithEmailAndPassword(email: email, password: password);
 
-      await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email.trim(),
-        password: password.trim(),
-      );
+        String downloadUrl = await _addImageToStorage(image);
 
-      String downloadUrl = _addImageToStorage(image!);
+        await _firebaseStore
+            .collection('users-list')
+            .doc(userCredential.user!.uid)
+            .set({
+          'email': email,
+          'username': username,
+          'profileImage': downloadUrl,
+        });
 
-      await _firebaseStore.collection('users-list').doc(user!.uid).set({
-        'email': email,
-        'username': username,
-        'profileImage': downloadUrl,
-      });
+        print(userCredential.user!.email);
+      } else {
+        print('something went wrong');
+      }
     } on FirebaseAuthException catch (e) {
       String errorMessage = "Error Occurred";
 
@@ -70,12 +77,12 @@ class AuthController {
         errorMessage = 'The account already exists for that email.';
       }
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(errorMessage),
-          backgroundColor: Theme.of(context).errorColor,
-        ),
-      );
+      // ScaffoldMessenger.of(context).showSnackBar(
+      //   SnackBar(
+      //     content: Text(errorMessage),
+      //     backgroundColor: Theme.of(context).errorColor,
+      //   ),
+      // );
     } catch (e) {
       return e.toString();
     }
