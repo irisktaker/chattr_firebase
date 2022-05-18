@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_sign_in/google_sign_in.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 
@@ -127,6 +128,39 @@ class AuthController {
 
   // function to sign out user
   Future signOut() async => await _firebaseAuth.signOut();
+
+  // function to sign in with google
+  signInWithGoogle() async {
+    try {
+      GoogleSignInAccount? _googleUser = await GoogleSignIn().signIn();
+      GoogleSignInAuthentication? _googleAuth =
+          await _googleUser?.authentication;
+
+      //. access to legal user data, and save it in authentication/users
+      final _credential = GoogleAuthProvider.credential(
+        idToken: _googleAuth?.idToken,
+        accessToken: _googleAuth?.accessToken,
+      );
+
+      //. upload the data to the authentication/users
+      UserCredential _userCredential =
+          await _firebaseAuth.signInWithCredential(_credential);
+      User? _user = _userCredential.user;
+      if (_user != null) {
+        // to not repeat the same user data
+        if (_userCredential.additionalUserInfo!.isNewUser) {
+          // if new user we need to save the user in our firebase database
+          _firebaseStore.collection('users-list').doc(_user.uid).set({
+            'email': _user.email,
+            'username': _user.displayName,
+            'profileImage': _user.photoURL,
+          });
+        }
+      }
+    } catch (e) {
+      print(e.toString());
+    }
+  }
 }
 
 showSnackBar(String content, BuildContext context) {

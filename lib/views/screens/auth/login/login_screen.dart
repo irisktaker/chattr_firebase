@@ -6,7 +6,6 @@ import 'package:chattr/shared/theme.dart';
 import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
 import 'package:chattr/controllers/auth_controller.dart';
-import 'package:chattr/views/screens/chat/chat_screen.dart';
 import 'package:chattr/shared/widgets/auth/custom_button.dart';
 import 'package:chattr/views/screens/auth/login/login_bloc.dart';
 import 'package:chattr/shared/widgets/auth/custom_text_field.dart';
@@ -25,28 +24,6 @@ class LoginScreen extends StatefulWidget {
 
 class _LoginScreenState extends State<LoginScreen> {
   final LoginBloc _bloc = LoginBloc();
-  bool _isLoading = false;
-
-  _loginUser() async {
-    setState(() => _isLoading = true);
-
-    String res = await AuthController().loginUser(
-      _bloc.emailController.text,
-      _bloc.passwordController.text,
-    );
-
-    setState(() => _isLoading = false);
-
-    if (res != 'success') {
-      return showSnackBar(res, context);
-    } else {
-      showSnackBar('Login successfully', context);
-      return Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (context) => const ChatScreen()),
-      );
-    }
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -56,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
       onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         resizeToAvoidBottomInset: false,
-        body: _isLoading
+        body: _bloc.isLoading
             ? const Center(child: CircularProgressIndicator())
             : Container(
                 width: getProportionateScreenWidth(SizeConfig.screenWidth),
@@ -106,33 +83,31 @@ class _LoginScreenState extends State<LoginScreen> {
                           const SizedBox(height: 16),
                           CustomButton(
                             onButtonPressed: () {
-                              _loginUser();
+                              _bloc.loginUser(context, setState);
                               _bloc.emailController.clear();
                               _bloc.passwordController.clear();
                             },
                             buttonTitle: "SingIn",
                           ),
                           const SizedBox(height: 10),
-                          Align(
-                            alignment: Alignment.centerLeft,
-                            child: InkWell(
-                              onTap: () => Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) =>
-                                        const ForgotPasswordScreen()),
-                              ),
-                              child: const Text(
-                                "Forgot password",
-                                style: TextStyle(
-                                    color: kPrimaryColor,
-                                    fontSize: 14,
-                                    fontWeight: FontWeight.w500),
-                              ),
+                          InkWell(
+                            onTap: () => Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) =>
+                                      const ForgotPasswordScreen()),
+                            ),
+                            child: const Text(
+                              "Forgot password",
+                              style: TextStyle(
+                                  color: kPrimaryColor,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w500),
                             ),
                           ),
-                          const SizedBox(height: 7),
+                          const SizedBox(height: 10),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
                             children: [
                               Text(
                                 "Don't have an account ",
@@ -174,6 +149,36 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ],
+                      ),
+                    ),
+                    MaterialButton(
+                      onPressed: () {
+                        // google sign in
+                        AuthController().signInWithGoogle();
+                      },
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 16, vertical: 10),
+                        margin: const EdgeInsets.symmetric(vertical: 14),
+                        width: getProportionateScreenHeight(
+                            SizeConfig.screenWidth / 2),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.6),
+                          borderRadius: BorderRadius.circular(32),
+                        ),
+                        child: Row(
+                          children: [
+                            Image.asset(
+                              "assets/images/google.png",
+                              width: 26,
+                            ),
+                            const SizedBox(width: 16),
+                            const Text(
+                              "Sign in with Google",
+                              style: TextStyle(fontSize: 14),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                     const Spacer(flex: 3),
