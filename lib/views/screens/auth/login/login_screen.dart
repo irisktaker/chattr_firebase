@@ -152,10 +152,8 @@ class _LoginScreenState extends State<LoginScreen> {
                       ),
                     ),
                     MaterialButton(
-                      onPressed: () {
-                        // google sign in
-                        AuthController().signInWithGoogle();
-                      },
+                      // google sign in
+                      onPressed: () => AuthController().signInWithGoogle(),
                       child: Container(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 16, vertical: 10),

@@ -41,7 +41,7 @@ class _ForgotPasswordScreenState extends State<ForgotPasswordScreen> {
                 height: getProportionateScreenWidth(SizeConfig.screenHeight),
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage("assets/images/bg1.jpeg"),
+                    image: AssetImage("assets/images/bg2.jpeg"),
                     fit: BoxFit.cover,
                   ),
                 ),
