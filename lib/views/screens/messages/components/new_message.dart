@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:chattr/shared/constants.dart';
@@ -15,16 +16,20 @@ class _NewMessageWidgetState extends State<NewMessageWidget> {
   String _enteredMessage = '';
 
   _sendMessage() async {
-    // final user = FirebaseAuth.instance.currentUser;
-    // final userData = await FirebaseFirestore.instance
-    //     .collection('users')
-    //     .doc(user!.uid)
-    //     .get();
+    //..
+    final user = FirebaseAuth.instance.currentUser;
+    final userData = await FirebaseFirestore.instance
+        .collection('users-list')
+        .doc(user!.uid)
+        .get();
 
     // Send a message here
     FirebaseFirestore.instance.collection('chat_messages').add({
       'message_text': _enteredMessage,
       'sent_at': Timestamp.now(),
+      'username': userData['username'],
+      'userId': user.uid,
+      // 'userImage': userData['image_url'], // does not exist within the DocumentSnapshotPlatform err
     });
 
     // Clear the message in the text field after sending it

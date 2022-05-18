@@ -17,7 +17,8 @@ class ChatMessagesScreen extends StatelessWidget {
         body: SafeArea(
           child: Container(
             padding: const EdgeInsets.symmetric(horizontal: 33),
-            child: Column(
+            child: 
+            Column(
               children: [
                 _appBar(),
                 const Expanded(child: MessageWidget()),

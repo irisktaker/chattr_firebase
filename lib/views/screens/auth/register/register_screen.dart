@@ -115,7 +115,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                   _bloc.usernameController.clear();
                                   _bloc.emailController.clear();
                                   _bloc.passwordController.clear();
-                                  _bloc.image!.clear();
+                                  // _bloc.image!.clear();
                                 },
                                 buttonTitle: "Register",
                               ),

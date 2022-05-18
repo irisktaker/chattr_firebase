@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -19,7 +20,7 @@ class MessageWidget extends StatelessWidget {
         }
 
         final docs = snapshot.data!.docs;
-        // final user = FirebaseAuth.instance.currentUser;
+        final user = FirebaseAuth.instance.currentUser;
 
         return ListView.builder(
           reverse: true,
@@ -27,9 +28,10 @@ class MessageWidget extends StatelessWidget {
           itemBuilder: (context, index) {
             return MessageBubbleWidget(
               docs[index]['message_text'],
-              // docs[index]['username'],
-              // docs[index]['userImage'],
-              // key: ValueKey(docs[index]['userId']),
+              docs[index]['username'], // available in firebase data
+              // docs[index]['userImage'], // available in firebase data
+              docs[index]['userId'] == user!.uid,
+              key: ValueKey(docs[index]['userId']),
             );
           },
         );

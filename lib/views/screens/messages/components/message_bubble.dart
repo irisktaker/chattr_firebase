@@ -4,25 +4,24 @@ import 'package:chattr/shared/constants.dart';
 import 'package:chattr/shared/size_config.dart';
 
 class MessageBubbleWidget extends StatelessWidget {
-  const MessageBubbleWidget(this.message,
-      // this.username,
+  const MessageBubbleWidget(
+      this.message,
+      this.username,
       // this.userImage,
-      // this.isMe,
+      this.isMe,
       {this.key})
       : super(key: key);
 
   @override
   final Key? key;
   final String message;
-  // final String username;
+  final String username;
   // final String userImage;
-  // final bool isMe;
+  final bool isMe;
 
   @override
   Widget build(BuildContext context) {
     SizeConfig().init(context);
-
-    bool isMe = true;
 
     return Row(
       mainAxisAlignment: isMe ? MainAxisAlignment.end : MainAxisAlignment.start,
