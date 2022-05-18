@@ -1,10 +1,10 @@
 import 'dart:typed_data';
 
-import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 
 class AuthController {
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
@@ -37,14 +37,14 @@ class AuthController {
     }
   }
 
-  // SIGN UP METHOD
-  Future signUp(
-    // BuildContext context,
+  // function to sign up user
+  Future<String> signUp(
     String email,
     String username,
     String password,
     Uint8List? image,
   ) async {
+    String res = "Error Occurred";
     try {
       if (email.isNotEmpty &&
           username.isNotEmpty &&
@@ -64,60 +64,75 @@ class AuthController {
           'profileImage': downloadUrl,
         });
 
-        print(userCredential.user!.email);
-      } else {
-        print('something went wrong');
+        res = 'success';
+      } //.
+      else {
+        res = 'fields must not be empty';
       }
     } on FirebaseAuthException catch (e) {
-      String errorMessage = "Error Occurred";
-
       if (e.code == 'weak-password') {
-        errorMessage = 'The password provided is too weak.';
+        res = 'The password provided is too weak.';
       } else if (e.code == 'email-already-in-use') {
-        errorMessage = 'The account already exists for that email.';
+        res = 'The account already exists for that email.';
+      } else {
+        return res;
       }
-
-      // ScaffoldMessenger.of(context).showSnackBar(
-      //   SnackBar(
-      //     content: Text(errorMessage),
-      //     backgroundColor: Theme.of(context).errorColor,
-      //   ),
-      // );
     } catch (e) {
-      return e.toString();
+      res = e.toString();
     }
+    return res;
   }
 
-  // SIGN IN METHOD
-  Future signIn(BuildContext context,
-      {required String email, required String password}) async {
+  // function to login users
+  Future<String> loginUser(String email, String password) async {
+    String res = "Error Occurred";
     try {
-      await _firebaseAuth.signInWithEmailAndPassword(
-          email: email.trim(), password: password.trim());
-      return null;
-    } on FirebaseAuthException catch (e) {
-      String errorMessage = "Error Occurred";
+      if (email.isNotEmpty && password.isNotEmpty) {
+        await _firebaseAuth.signInWithEmailAndPassword(
+            email: email.trim(), password: password.trim());
 
-      if (e.code == 'user-not-found') {
-        errorMessage = 'No user found for that email.';
-      } else if (e.code == 'wrong-password') {
-        errorMessage = 'Wrong password provided for that user.';
+        res = 'success';
+      } else {
+        res = 'fields must not be empty';
       }
 
-      ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(
-          content: Text(errorMessage),
-          backgroundColor: Theme.of(context).errorColor,
-        ),
-      );
-    } catch (e) {
-      return e.toString();
+      res = 'success';
     }
+    on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        res = 'No user found for that email.';
+      } else if (e.code == 'wrong-password') {
+        res = 'Wrong password provided for that user.';
+      }
+    }
+    catch (e) {
+      res = e.toString();
+    }
+    return res;
   }
 
-  // SIGN OUT
-  Future signOut() async {
-    await _firebaseAuth.signOut();
-    print('User Sign Out');
+  // function to reset password
+  resetPassword(String email) async {
+    String res = 'some error occurred';
+
+    try {
+      if (email.isNotEmpty) {
+        await _firebaseAuth.sendPasswordResetEmail(email: email);
+
+        res = 'success';
+      } else {
+        res = 'email must not be empty';
+      }
+    } catch (e) {
+      res = e.toString();
+    }
+    return res;
   }
+
+  // function to sign out user
+  Future signOut() async => await _firebaseAuth.signOut();
+}
+
+showSnackBar(String content, BuildContext context) {
+  ScaffoldMessenger.of(context).showSnackBar(SnackBar(content: Text(content)));
 }

@@ -3,13 +3,11 @@
 import 'package:chattr/shared/constants.dart';
 import 'package:flutter/material.dart';
 
-class CustomTextFormField extends StatelessWidget {
-  CustomTextFormField({
+class CustomTextField extends StatelessWidget {
+  CustomTextField({
     Key? key,
     required this.controller,
     required this.hintText,
-    required this.validator,
-    required this.onSaved,
     required this.keyboardType,
     this.obscureText = false,
   }) : super(key: key);
@@ -29,11 +27,9 @@ class CustomTextFormField extends StatelessWidget {
         borderRadius: BorderRadius.circular(20),
         color: kBgColor.withOpacity(0.65),
       ),
-      child: TextFormField(
+      child: TextField(
         key: key,
         controller: controller,
-        validator: validator,
-        onSaved: onSaved,
         keyboardType: keyboardType,
         obscureText: obscureText,
         decoration: InputDecoration(

@@ -17,7 +17,7 @@ import 'package:chattr/views/screens/auth/register/register_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 
 class RegisterScreen extends StatefulWidget {
-  RegisterScreen({Key? key}) : super(key: key);
+  const RegisterScreen({Key? key}) : super(key: key);
 
   static const routeScreen = 'register_screen';
 
@@ -155,46 +155,23 @@ class _RegisterScreenState extends State<RegisterScreen> {
                             ],
                           ),
                           const SizedBox(height: 16),
-                          CustomTextFormField(
+                          CustomTextField(
                             key: const ValueKey('username'),
-                            validator: (val) {
-                              if (val!.isEmpty || val.length < 4) {
-                                return "Please enter at least 4 characters";
-                              }
-                              return null;
-                            },
-                            onSaved: (val) =>
-                                _bloc.usernameController.text = val!,
                             controller: _bloc.usernameController,
                             keyboardType: TextInputType.text,
                             hintText: "username",
                           ),
                           const SizedBox(height: 16),
-                          CustomTextFormField(
+                          CustomTextField(
                             key: const ValueKey('email'),
-                            validator: (val) {
-                              if (val!.isEmpty || !val.contains('@')) {
-                                return "Please enter a valid email address";
-                              }
-                              return null;
-                            },
-                            onSaved: (val) => _bloc.emailController.text = val!,
                             controller: _bloc.emailController,
                             keyboardType: TextInputType.emailAddress,
                             hintText: "email",
                           ),
                           const SizedBox(height: 16),
-                          CustomTextFormField(
+                          CustomTextField(
                             key: const ValueKey('password'),
-                            validator: (val) {
-                              if (val!.isEmpty || val.length < 7) {
-                                return "Please enter at least 7 characters";
-                              }
-                              return null;
-                            },
                             obscureText: true,
-                            onSaved: (val) =>
-                                _bloc.passwordController.text = val!,
                             keyboardType: TextInputType.visiblePassword,
                             controller: _bloc.passwordController,
                             hintText: "password",
@@ -203,7 +180,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                           CustomButton(
                             onButtonPressed: () async {
                               await AuthController().signUp(
-                                // context,
                                 _bloc.emailController.text,
                                 _bloc.usernameController.text,
                                 _bloc.passwordController.text,
