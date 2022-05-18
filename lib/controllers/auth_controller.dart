@@ -95,17 +95,13 @@ class AuthController {
       } else {
         res = 'fields must not be empty';
       }
-
-      res = 'success';
-    }
-    on FirebaseAuthException catch (e) {
+    } on FirebaseAuthException catch (e) {
       if (e.code == 'user-not-found') {
         res = 'No user found for that email.';
       } else if (e.code == 'wrong-password') {
         res = 'Wrong password provided for that user.';
       }
-    }
-    catch (e) {
+    } catch (e) {
       res = e.toString();
     }
     return res;
