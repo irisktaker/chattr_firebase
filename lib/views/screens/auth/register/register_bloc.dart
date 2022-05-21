@@ -5,7 +5,7 @@ import 'package:chattr/shared/constants.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:chattr/controllers/auth_controller.dart';
-import 'package:chattr/views/screens/chat/chat_screen.dart';
+import 'package:chattr/views/bottom_navigation_bar.dart';
 
 class RegisterBloc {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
@@ -33,7 +33,7 @@ class RegisterBloc {
       showSnackBar('Sing up successfully', context);
       return Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const ChatScreen()),
+        MaterialPageRoute(builder: (context) => const BottomNavigationBarTabs()),
       );
     }
   }

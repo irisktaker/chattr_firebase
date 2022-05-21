@@ -1,14 +1,14 @@
-import 'package:chattr/views/screens/chat/chat_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:chattr/controllers/auth_controller.dart';
+import 'package:chattr/views/bottom_navigation_bar.dart';
 
 class LoginBloc {
   final FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-    bool isLoading = false;
+  bool isLoading = false;
 
   loginUser(BuildContext context, setState) async {
     setState(() => isLoading = true);
@@ -26,7 +26,8 @@ class LoginBloc {
       showSnackBar('Login successfully', context);
       return Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => const ChatScreen()),
+        MaterialPageRoute(
+            builder: (context) => const BottomNavigationBarTabs()),
       );
     }
   }

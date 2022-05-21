@@ -9,6 +9,8 @@ import 'package:chattr/controllers/auth_controller.dart';
 import 'package:chattr/views/bottom_navigation_bar.dart';
 import 'package:chattr/views/screens/auth/login/login_screen.dart';
 
+import 'shared/utils/theme.dart';
+
 Future<void> main() async {
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
@@ -30,9 +32,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Chattr',
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      themeMode: ThemeMode.system,
+      darkTheme: darkThemeMode,
+      theme: lightThemeMode,
       // initialRoute: BottomNavigationBarTabs.routeScreen,
       // initialRoute: '/',
       home: StreamBuilder(
